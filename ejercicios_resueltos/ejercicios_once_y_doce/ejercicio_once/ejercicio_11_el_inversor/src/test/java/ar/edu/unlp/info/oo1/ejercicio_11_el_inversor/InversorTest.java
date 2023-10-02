@@ -21,6 +21,13 @@ class InversorTest {
 		plazo = new PlazoFijo(LocalDate.now().minusDays(24), 3000, 1);
 		inversion = new InversionEnAcciones("accion", 5, 100.0);	
 	}
+	
+	public static void agregarInversiones(Inversor joaco, 
+			InversionEnAcciones inversion, 
+			PlazoFijo plazo) {
+		joaco.addInversion(inversion);
+		joaco.addInversion(plazo);
+	}
 
 	@Test
 	void testInversor() {
@@ -30,14 +37,16 @@ class InversorTest {
 		assertNotNull(joaco.getInversiones());
 	}
 	
+	@Test
 	void testAgregar() {
-		joaco.addInversion(inversion);
-		joaco.addInversion(plazo);
+		agregarInversiones(joaco, inversion, plazo);
 		assertEquals(2, joaco.getInversiones().size());
 	}
 	
+	@Test
 	void testValorActual() {
-		assertEquals(8720, joaco.valorActual());
+		agregarInversiones(joaco, inversion, plazo);
+		assertEquals(4220, joaco.valorActual());
 		assertEquals(0, inverSinAcciones.valorActual());
 	}
 }

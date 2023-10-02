@@ -33,27 +33,39 @@ class ReporteDeConstruccionTest {
 		assertNotNull(report.getPiezas());
 		assertNotNull(reportVacio.getPiezas());
 	}
-
-	@Test
-	void testAddPieza() {
+	
+	public static void agregarPiezas(ReporteDeConstruccion report,
+			Cilindro c,
+			Cilindro cNoCumple,
+			Esfera e,
+			Esfera eNoCumple,
+			PrismaRectangular p,
+			PrismaRectangular pNoCumple) {
 		report.addPieza(e);
 		report.addPieza(p);
 		report.addPieza(c);
 		report.addPieza(cNoCumple);
 		report.addPieza(eNoCumple);
 		report.addPieza(pNoCumple);
+	}
+
+	@Test
+	void testAddPieza() {
+		agregarPiezas(report, c, cNoCumple, e, eNoCumple, p, pNoCumple);
 		assertEquals(6, report.getPiezas().size());
 		assertEquals(0, reportVacio.getPiezas().size());
 	}
 
 	@Test
 	void testVolumenDeMaterial() {
-		assertEquals(1127, Math.round(report.volumenDeMaterial("Hierro")));
+		agregarPiezas(report, c, cNoCumple, e, eNoCumple, p, pNoCumple);
+		assertEquals(1126, Math.round(report.volumenDeMaterial("Hierro")));
 		assertEquals(0, Math.round(reportVacio.volumenDeMaterial("Hierro")));
 	}
 
 	@Test
 	void testGetSuperficieDeColor() {
+		agregarPiezas(report, c, cNoCumple, e, eNoCumple, p, pNoCumple);
 		assertEquals(842, Math.round(report.getSuperficieDeColor("Rojo")));
 		assertEquals(0, Math.round(reportVacio.getSuperficieDeColor("Rojo")));
 	}
