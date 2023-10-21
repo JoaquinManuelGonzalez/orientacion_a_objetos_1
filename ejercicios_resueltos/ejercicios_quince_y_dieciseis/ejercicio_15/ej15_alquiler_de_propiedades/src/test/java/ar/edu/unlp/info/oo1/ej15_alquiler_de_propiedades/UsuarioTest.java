@@ -31,13 +31,11 @@ class UsuarioTest {
 		propiedadConReservas = new Propiedad ("p1", 
 				"prop 1", 
 				"calle 1", 
-				10.0, 
-				usuarioConPropiedadConReservas);
+				10.0);
 		propiedadSinReservas = new Propiedad ("p2", 
 				"prop 2", 
 				"calle 2", 
-				20.0, 
-				usuarioConPropiedadSinReservas);
+				20.0);
 		
 		lapsoUno = new DateLapse (LocalDate.of(2023, 2, 2), LocalDate.of(2023, 5, 5));
 		lapsoDos = new DateLapse (LocalDate.of(2023, 5, 5), LocalDate.of(2023, 6, 6));

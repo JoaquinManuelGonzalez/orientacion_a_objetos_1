@@ -33,6 +33,18 @@ public class Usuario {
 		return direccion;
 	}
 	
+	public Propiedad crearReserva (String nombre,
+			String descripcion,
+			String direccion,
+			double precioPorNoche) {
+		Propiedad nuevaPropiedad = new Propiedad (nombre, 
+				descripcion, 
+				direccion, 
+				precioPorNoche);
+		this.addPropiedad(nuevaPropiedad);
+		return nuevaPropiedad;
+	}
+	
 	public List<Reserva> getReservas () {
 		return new ArrayList<Reserva>(this.reservas);
 	}
@@ -55,6 +67,13 @@ public class Usuario {
 	
 	public void removePropiedad (Propiedad propiedad) {
 		this.propiedades.remove(propiedad);
+	}
+	
+	public List<Propiedad> buscarPropiedadesDisponibles (DateLapse periodo) {
+		return this.getPropiedades()
+				.stream()
+				.filter(propiedad -> propiedad.buscarDisponibilidad(periodo))
+				.toList();
 	}
 	
 	public double calcularIngresosEnUnPeriodo (DateLapse periodo) {

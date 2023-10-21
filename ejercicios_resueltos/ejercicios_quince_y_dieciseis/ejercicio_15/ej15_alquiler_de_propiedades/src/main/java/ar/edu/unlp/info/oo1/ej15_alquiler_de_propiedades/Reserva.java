@@ -34,11 +34,11 @@ public class Reserva {
 		return this.propiedadReservada;
 	}
 	
-	public int calcularCantidadDeNoches(DateLapse periodo) {
+	private int calcularCantidadDeNoches(DateLapse periodo) {
 		return periodo.sizeInDays();
 	}
 	
-	public double precioReserva () {
+	public double calcularPrecioDeReserva () {
 		return (this.propiedadReservada.getPrecioPorNoche() * this.getCantidadDeNoches());
 	}
 	
@@ -47,9 +47,7 @@ public class Reserva {
 	}
 	
 	public boolean estaOverlap (DateLapse periodo) {
-		return (periodo.overlaps(this.getDateLapse()))
-				|| 
-				(this.getDateLapse().overlaps(periodo));
+		return this.getDateLapse().overlaps(periodo);
 	}
 	
 }

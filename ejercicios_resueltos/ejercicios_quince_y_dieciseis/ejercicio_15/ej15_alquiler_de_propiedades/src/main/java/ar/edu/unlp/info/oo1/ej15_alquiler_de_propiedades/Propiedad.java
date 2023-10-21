@@ -9,19 +9,16 @@ public class Propiedad {
 	private String descripcion;
 	private String nombre;
 	private double precioPorNoche;
-	private Usuario propietario;
 	private List<Reserva> reservas;
 	
 	public Propiedad (String nombre, 
 			String descripcion, 
 			String direccion, 
-			double precioPorNoche,
-			Usuario propietario) {
+			double precioPorNoche) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.direccion = direccion;
 		this.precioPorNoche = precioPorNoche;
-		this.propietario = propietario;
 		this.reservas = new ArrayList<>();
 	}
 	
@@ -44,10 +41,6 @@ public class Propiedad {
 	public String getNombre() {
 		return nombre;
 	}
-
-	public Usuario getPropietario() {
-		return propietario;
-	}
 	
 	public void addReserva (Reserva reserva) {
 		this.reservas.add(reserva);
@@ -67,7 +60,7 @@ public class Propiedad {
 		return this.getReservas()
 				.stream()
 				.filter(reserva -> reserva.estaOverlap(periodo))
-				.mapToDouble(reserva -> reserva.precioReserva())
+				.mapToDouble(reserva -> reserva.calcularPrecioDeReserva())
 				.sum();
 	}
 	

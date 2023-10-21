@@ -38,7 +38,11 @@ public class DateLapse {
 	public boolean overlaps (DateLapse anotherDateLapse) {
 		return ((this.includesDate(anotherDateLapse.getFrom())) 
 				|| 
-				(this.includesDate(anotherDateLapse.getTo())));
+				(this.includesDate(anotherDateLapse.getTo())))
+				||
+				((anotherDateLapse.includesDate(this.getFrom())) 
+						|| 
+				(anotherDateLapse.includesDate(this.getTo())));
 	}
 	
 	public boolean dateBeforeLapse (LocalDate other) {

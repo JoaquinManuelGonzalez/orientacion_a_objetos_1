@@ -2,28 +2,21 @@ package ar.edu.unlp.info.oo1.ej15_alquiler_de_propiedades;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class OOBnB {
 	
 	private List<Usuario> usuarios;
-	private List<Propiedad> propiedades;
 	
 	public OOBnB () {
 		this.usuarios = new ArrayList<>();
-		this.propiedades = new ArrayList<>();
 	}
 	
 	public void addUsuario (Usuario usuario) {
 		this.usuarios.add(usuario);
 	}
 	
-	public void addPropiedad (Propiedad propiedad) {
-		this.propiedades.add(propiedad);
-	}
-	
-	public List<Propiedad> getPropiedades() {
-		return new ArrayList<Propiedad>(this.propiedades);
+	public List<Usuario> getUsuarios () {
+		return new ArrayList<Usuario>(this.usuarios);
 	}
 	
 	public Usuario registrarUsuario (String nombre,
@@ -39,20 +32,15 @@ public class OOBnB {
 			double precioPorNoche,
 			String direccion,
 			Usuario propietario) {
-		Propiedad nuevaPropiedad = new Propiedad (nombre, 
-				descripcion, 
-				direccion, 
-				precioPorNoche, 
-				propietario);
-		this.addPropiedad(nuevaPropiedad);
+		Propiedad nuevaPropiedad = propietario.crearReserva(nombre, descripcion, direccion, precioPorNoche);
 		return nuevaPropiedad;
 	}
 	
 	public List<Propiedad> buscarPropiedadesDisponibles (DateLapse periodo) {
-		return this.getPropiedades()
+		return this.getUsuarios()
 				.stream()
-				.filter(propiedad -> propiedad.buscarDisponibilidad(periodo))
-				.collect(Collectors.toList());
+				.flatMap(usuario -> usuario.buscarPropiedadesDisponibles(periodo).stream())
+				.toList();
 	}
 	
 	public Reserva hacerReserva (Propiedad propiedad, 
@@ -67,15 +55,15 @@ public class OOBnB {
 		return nuevaReserva;
 	}
 	
-	public double calcularPrecioDeReserva (Reserva reserva) {
-		return reserva.precioReserva();
-	}
-	
 	public void eliminarReserva (Reserva reserva) {
 		if (reserva.chequearFechaPosterior()) {
 			reserva.getInquilino().removeReserva(reserva);
 			reserva.getPropiedadReservada().removeReserva(reserva);
 		}
+	}
+	
+	public double calcularPrecioDeReserva (Reserva reserva) {
+		return reserva.calcularPrecioDeReserva();
 	}
 	
 	public List<Reserva> obtenerReservasDeUnUsuario (Usuario usuario) {

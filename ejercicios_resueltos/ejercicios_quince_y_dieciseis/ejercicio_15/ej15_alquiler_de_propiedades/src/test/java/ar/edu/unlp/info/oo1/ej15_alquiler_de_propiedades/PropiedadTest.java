@@ -32,13 +32,11 @@ class PropiedadTest {
 		propiedadConReservas = new Propiedad ("p1", 
 				"prop 1", 
 				"calle 1", 
-				10.0, 
-				usuarioUno);
+				10.0);
 		propiedadSinReservas = new Propiedad ("p2", 
 				"prop 2", 
 				"calle 2", 
-				20.0, 
-				usuarioUno);
+				20.0);
 		
 		reserva = new Reserva (propiedadConReservas, lapsoUno, usuarioUno);
 		

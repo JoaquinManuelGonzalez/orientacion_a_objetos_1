@@ -26,20 +26,19 @@ class ReservaTest {
 		propiedadPrecioUno = new Propiedad ("p", 
 				"prop 2", 
 				"calle 2", 
-				1.0, 
-				usuarioDos);
+				1.0);
 		reservaNochesCeroPrecioUno = new Reserva (propiedadPrecioUno, lapsoCero, usuarioUno);
 		reservaNochesUnoPrecioUno = new Reserva (propiedadPrecioUno, lapsoUno, usuarioDos);
 	}
 
 	@Test
-	void testPrecioReservaPrecioUnoNocheUno() {
-		assertEquals(1, reservaNochesUnoPrecioUno.precioReserva());
+	void testCalcularPrecioReservaPrecioUnoNocheUno() {
+		assertEquals(1, reservaNochesUnoPrecioUno.calcularPrecioDeReserva());
 	}
 	
 	@Test
-	void testPrecioReservaPrecioCeroNocheCero() {
-		assertEquals(0, reservaNochesCeroPrecioUno.precioReserva());
+	void testCalcularPrecioReservaPrecioCeroNocheCero() {
+		assertEquals(0, reservaNochesCeroPrecioUno.calcularPrecioDeReserva());
 	}
 
 }
